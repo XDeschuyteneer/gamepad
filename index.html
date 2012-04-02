@@ -1,1 +1,143 @@
-<h1>Page du projet<h2>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Gamepad API Test</title>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>-->
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <h1>Gamepad API Test</h1>
+    <table border="1" cellspacing="0" style="float: left">
+      <caption>Buttons</caption>
+      <tr>
+	<th>Nom</th>
+	<th>Pressed</th>
+	<th>Value</th>
+      </tr>
+      <tr>
+	<td id="gauche_nom">gauche</td>
+	<td id="gauche_pressed"></td>
+	<td id="gauche_val"></td>
+      </tr>
+      <tr>
+	<td id="droite_nom">droite</td>
+	<td id="droite_pressed"></td>
+	<td id="droite_val"></td>
+      </tr>
+      <tr>
+	<td id="haut_nom">haut</td>
+	<td id="haut_pressed"></td>
+	<td id="haut_val"></td>
+      </tr>
+      <tr>
+	<td id="bas_nom">bas</td>
+	<td id="bas_pressed"></td>
+	<td id="bas_val"></td>
+      </tr>
+
+      <tr>
+	<td id="rond_nom">rond</td>
+	<td id="rond_pressed"></td>
+	<td id="rond_val"></td>
+      </tr>
+       <tr>
+	<td id="croix_nom">croix</td>
+	<td id="croix_pressed"></td>
+	<td id="croix_val"></td>
+      </tr>
+      <tr>
+	<td id="carre_nom">carre</td>
+	<td id="carre_pressed"></td>
+	<td id="carre_val"></td>
+      </tr>
+      <tr>
+	<td id="triangle_nom">triangle</td>
+	<td id="triangle_pressed"></td>
+	<td id="triangle_val"></td>
+      </tr>
+
+      <tr>
+	<td id="L1_nom">L1</td>
+	<td id="L1_pressed"></td>
+	<td id="L1_val"></td>
+      </tr>
+      <tr>
+	<td id="L2_nom">L2</td>
+	<td id="L2_pressed"></td>
+	<td id="L2_val"></td>
+      </tr>
+      <tr>
+	<td id="R1_nom">R1</td>
+	<td id="R1_pressed"></td>
+	<td id="R1_val"></td>
+      </tr>
+      <tr>
+	<td id="R2_nom">R2</td>
+	<td id="R2_pressed"></td>
+	<td id="R2_val"></td>
+      </tr>
+
+       <tr>
+	<td id="L3_nom">L3</td>
+	<td id="L3_pressed"></td>
+	<td id="L3_val"></td>
+      </tr>
+      <tr>
+	<td id="R3_nom">R3</td>
+	<td id="R3_pressed"></td>
+	<td id="R3_val"></td>
+      </tr>
+
+      <tr>
+	<td id="start_nom">start</td>
+	<td id="start_pressed"></td>
+	<td id="start_val"></td>
+      </tr>
+      <tr>
+	<td id="select_nom">select</td>
+	<td id="select_pressed"></td>
+	<td id="select_val"></td>
+      </tr>
+	
+      <tr>
+	<td id="PS_nom">PS</td>
+	<td id="PS_pressed"></td>
+	<td id="PS_val"></td>
+      </tr>
+    </table>
+    
+    <canvas id="draw" style="float: center">
+    </canvas>
+    
+    <table border="1" cellspacing="0" style="float: right">
+      <caption>Axes</captions>
+      <tr>
+	<th>Nom</th>
+	<th>Pressed</th>
+	<th>Value</th>
+      </tr>
+      
+      <tr>
+	<td id="X_Left_nom">X Left</td>
+	<td id="X_Left_pressed"></td>
+	<td id="X_Left_val"></td>
+      </tr>
+      <tr>
+	<td id="Y_Left_nom">Y Left</td>
+	<td id="Y_Left_pressed"></td>
+	<td id="Y_Left_val"></td>
+      </tr>
+      <tr>
+	<td id="X_Right_nom">X Right</td>
+	<td id="X_Right_pressed"></td>
+	<td id="X_Right_val"></td>
+      </tr>
+      <tr>
+	<td id="Y_Right_nom">Y Right</td>
+	<td id="Y_Right_pressed"></td>
+	<td id="Y_Right_val"></td>
+      </tr>
+    </table>
+  </body>
+</html>
