@@ -5,13 +5,21 @@ $(document).ready(function() {
 	        window.mozRequestAnimationFrame
 	})();
 
+	var ratioPad = 0.45;
+	var ratioTouch = 0.5;
+	var selectedColor = "rgba(0,0,0,1)";
+	var unselectedColor = "rgba(0,0,0,0.5)";
+
+	var gamepads = navigator.webkitGamepads;
+
+	var padMap = new Object();
+
 	var canvas = document.getElementById('win');
     var context = canvas.getContext('2d');
 
 	var ps3Buttons = new Array();
 
-	var gamepadActive = false,
-	ps3Buttons = new Array(),
+	var ps3Buttons = new Array(),
 	ps3Axis = new Array();
 
 	ps3Buttons[0]   = 'croix', 
@@ -42,12 +50,18 @@ $(document).ready(function() {
 	ps3Axis[2] = 'X_Right',
 	ps3Axis[3] = 'Y_Right';
 
+	/*
+	 * Cette méthode nettoie le canvas
+	 */
+
 	function clean() {
 		context.clearRect(0, 0, canvas.width, canvas.height);
-	};
+	}
 
+	/*
+	 * Cette méthode nettoie les tableaux
+	 */
 	function clear() {
-		ps3Init();
 	    var cell;
 	    var ids = new Array("croix_pressed", "croix_val",
 				"carre_pressed", "carre_val",
@@ -76,6 +90,9 @@ $(document).ready(function() {
 	    }
 	}
 
+	/*
+	 * Cette méthode modifie la valeur de la cellule "name" avec la valeur "val"
+	 */
 	function set(name, val) {
 		padMap[name] = val;
 	    var cell = document.getElementById(name + "_pressed");
@@ -84,6 +101,9 @@ $(document).ready(function() {
 	    cell.innerHTML = val.toFixed(2);
 	}
 
+	/*
+	 * Cette méthode s'occupe de dispatcher l'update des boutons
+	 */
 	function dispatchButtons(buttons) {
 	    for (var i = 0; i < buttons.length; i++) {
 			if (buttons[i] > 0) {
@@ -92,6 +112,9 @@ $(document).ready(function() {
 	    }
 	}
 
+	/*
+	 * Cette méthode s'occupe de dispatcher les axes
+	 */
 	function dispatchAxis(axes) {
 	    for (var i = 0; i < axes.length; i++) {
 			if (axes[i] != 0) {
@@ -100,15 +123,10 @@ $(document).ready(function() {
 	    }
 	}
 
-	var ratioPad = 0.45;
-	var ratioTouch = 0.5;
-	var selectedColor = "rgba(0,0,0,1)";
-	var unselectedColor = "rgba(0,0,0,0.5)";
-	var xleft = 0;
-	var xright = 0;
-	var yleft = 0;
-	var yright = 0;
-
+	
+	/*
+	 * Cette méthode dessine le gamepad
+	 */
 	function draw() {
 		var img = new Image();
 
@@ -342,7 +360,6 @@ $(document).ready(function() {
 		context.fill();
 	}
 
-	var padMap = new Object();
 
 	function ps3Init() {
 		padMap['croix'] = 0;
@@ -374,30 +391,52 @@ $(document).ready(function() {
 		padMap['Y_Right'] = 0;
 	}
 
-ps3Init();
-console.log(padMap);
+	function updatePad() {
+		//reunitialise les valeurs du pad
+		ps3Init();
+		gamepads = navigator.webkitGamepads;
+		//parcours les divers pads
+		var ps3Pad = false;
+		var xboxPad = false;
+	    for (var i = 0; i < gamepads.length; i++) {
+			var pad = gamepads[i];
+			if (pad) {
+				if (pad.id.search("Sony PLAYSTATION(R)3")) {
+					ps3Pad = true;
+					
+					//si il y a un pad je récupère les axes et les buttons
+			    	var axes = pad.axes;
+			    	var buttons = pad.buttons;
+			    	clear();
+			    	dispatchButtons(buttons);
+			    	dispatchAxis(axes);
+				} else if (pad.id.search("Microsoft")) {
+					xboxPad = true;
+				}
+			}	
+	    }
+
+	    var status = document.getElementById("support");
+	    if (!ps3Pad && !xboxPad) {
+	    	status.innerHTML = "[No pad]";
+	    } else if (ps3Pad) {
+	    	status.innerHTML = "[PS3 pad ok]";
+	    } else if (xboxPad) {
+	    	status.innerHTML = "[bad pad (xbox)]";
+	    }
+	}
 
 	function runAnimation() {
 	    window.requestAnimationFrame(runAnimation);
 	    
+	    //clean the tabs
 	    clean();
+	    //draw the canvas
 	    draw();
-	  
-	    var gamepads = navigator.webkitGamepads;
-
-	    for (var i = 0; i < gamepads.length; i++) {
-			var pad = gamepads[i];
-			if (pad) {
-		    	var axes = pad.axes;
-		    	var buttons = pad.buttons;
-		    	clear();
-		    	dispatchButtons(buttons);
-		    	dispatchAxis(axes);
-			}	
-	    }
+	    //update pads
+	  	updatePad();
+	    
 	}
-
-
 
 	window.requestAnimationFrame(runAnimation);
 });
