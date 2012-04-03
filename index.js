@@ -403,7 +403,7 @@ $(document).ready(function() {
 			if (pad) {
 				if (pad.id.search("Sony PLAYSTATION(R)3")) {
 					ps3Pad = true;
-					
+
 					//si il y a un pad je récupère les axes et les buttons
 			    	var axes = pad.axes;
 			    	var buttons = pad.buttons;
@@ -416,16 +416,23 @@ $(document).ready(function() {
 			}	
 	    }
 
-	    var status = document.getElementById("support");
+	    var navigatorstatus = document.getElementById("navigator");
+	    var padstatus = document.getElementById("pad");
 	    if (!ps3Pad && !xboxPad) {
-	    	status.innerHTML = "[No pad]";
+	    	padstatus.innerHTML = "[No pad]";
 	    } else if (ps3Pad) {
-	    	status.innerHTML = "[PS3 pad ok]";
+	    	padstatus.innerHTML = "[PS3 pad]";
 	    } else if (xboxPad) {
-	    	status.innerHTML = "[bad pad (xbox)]";
+	    	padstatus.innerHTML = "[KO: xbox pad]";
+	    }
+
+	    if (navigator.userAgent.search("Chrome/18")) {
+	    	navigatorstatus.innerHTML = "Nagigateur OK: Google Chrome beta";
+	    } else {
+	    	navigatorstatus.innerHTML = "KO: Requiert Google Chrome beta (v. 18)";
 	    }
 	}
-
+	
 	function runAnimation() {
 	    window.requestAnimationFrame(runAnimation);
 	    
