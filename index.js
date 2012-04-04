@@ -7,6 +7,7 @@ $(document).ready(function() {
 
 	var ratioPad = 0.45;
 	var ratioTouch = 0.5;
+	var ampAnalogic = 10;
 	var selectedColor = "rgba(0,0,0,1)";
 	var unselectedColor = "rgba(0,0,0,0.5)";
 
@@ -144,7 +145,7 @@ $(document).ready(function() {
 			context.fillStyle = unselectedColor;
 		}
 		context.beginPath();
-		context.arc(157 + padMap['X_Left'] * 5, 115 + padMap['Y_Left'] * 5, 20, 0, Math.PI*2, true);
+		context.arc(157 + padMap['X_Left'] * ampAnalogic, 115 + padMap['Y_Left'] * ampAnalogic, 20, 0, Math.PI*2, true);
 		context.closePath();
 		context.stroke();
 		context.fill();
@@ -156,7 +157,7 @@ $(document).ready(function() {
 			context.fillStyle = unselectedColor;
 		}
 		context.beginPath();
-		context.arc(244 + padMap['X_Right'] * 5, 115 + padMap['Y_Right'] * 5, 20 , 0, Math.PI*2, true);
+		context.arc(244 + padMap['X_Right'] * ampAnalogic, 115 + padMap['Y_Right'] * ampAnalogic, 20 , 0, Math.PI*2, true);
 		context.closePath();
 		context.stroke();
 		context.fill();
